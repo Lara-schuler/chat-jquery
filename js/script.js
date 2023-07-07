@@ -12,7 +12,7 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
                 $('#salas').html('');
-                response.resp.forEach(sala => {
+                response.forEach(sala => {
                     $('#salas').append(`<div class="sala" id="${sala.id}">${sala.nome}</div>`);
                 }
                 );
@@ -34,14 +34,14 @@ $(document).ready(function () {
     let entrarSala = (idSala) => {
         console.log('Agora entra na sala')
         $.ajax({
-            url: 'https://api-chat-zexy.onrender.com/',
+            url: 'https://api-chat-zexy.onrender.com/sala/entrar',
             method: 'POST',
             headers: { token: token, iduser: idUser, nick: nick },
             data: { idSala: idSala },
             success: function (response) {
                 console.log(response);
                 $('#salas').html('');
-                response.resp.forEach(sala => {
+                response.forEach(sala => {
                     $('#salas').append(`<div class="sala" id="${sala.id}">${sala.nome}</div>`);
                 }
                 );
@@ -56,14 +56,14 @@ $(document).ready(function () {
     let listarMensagens = (idSala) => {
         console.log('Agora lista as mensagens da sala')
         $.ajax({
-            url: 'https://api-chat-zexy.onrender.com/',
+            url: 'https://api-chat-zexy.onrender.com/sala/mensagens',
             method: 'GET',
             headers: { token: token, iduser: idUser, nick: nick },
             data: { idSala: idSala },
             success: function (response) {
                 console.log(response);
                 $('#mensagens').html('');
-                response.resp.forEach(mensagem => {
+                response.forEach(mensagem => {
                     $('#mensagens').append(`<div class="mensagem" id="${mensagem.id}">${mensagem.texto}</div>`);
                 }
                 );
@@ -79,7 +79,7 @@ $(document).ready(function () {
     let enviarMensagem = (idSala, texto) => {
         console.log('Agora envia a mensagem')
         $.ajax({
-            url: 'https://api-chat-zexy.onrender.com/',
+            url: 'https://api-chat-zexy.onrender.com/sala/mensagem',
             method: 'POST',
             headers: { token: token, iduser: idUser, nick: nick },
             data: { idSala: idSala, texto: texto },
